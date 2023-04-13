@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from './product.model';
+import { Product } from './models/product.model';
 
 @Component({
   selector: 'app-root',
@@ -66,6 +66,9 @@ export class AppComponent {
     password: '',
   };
 
+  inputParent: string = '';
+  sonImage: string = '';
+
   showName() {
     this.nameActive = !this.nameActive;
   }
@@ -97,5 +100,9 @@ export class AppComponent {
     const el = e.target as HTMLFormElement;
     e.preventDefault();
     console.log(this.register);
+  }
+
+  onLoaded(img: string) {
+    this.sonImage = img;
   }
 }

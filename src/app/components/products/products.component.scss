@@ -1,0 +1,10 @@
+.products {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+}

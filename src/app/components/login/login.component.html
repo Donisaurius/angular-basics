@@ -1,0 +1,67 @@
+<h2>Formulario</h2>
+<!-- @input -->
+<p (click)="sendDataToFather()">{{ name }}</p>
+
+<!-- <form
+  #registerForm="ngForm"
+  (ngSubmit)="handleRegister($event)"
+  class="form-login"
+>
+  <div class="form-container">
+    <div class="input-group">
+      <label for="name">Nombre</label>
+      <input
+        type="text"
+        required
+        name="name"
+        id="name"
+        [(ngModel)]="register.name"
+        #name="ngModel"
+      />
+      <p
+        [ngClass]="{
+          'error-input': !name.valid
+        }"
+      >
+        El nombre es necesario
+      </p>
+    </div>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        required
+        name="email"
+        id="email"
+        [(ngModel)]="register.email"
+        #email="ngModel"
+      />
+      <p
+        [ngClass]="{
+          'error-input': !email.valid
+        }"
+      >
+        El email es necesario
+      </p>
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        required
+        name="password"
+        id="password"
+        [(ngModel)]="register.password"
+        #password="ngModel"
+      />
+      <p
+        [ngClass]="{
+          'error-input': !password.valid
+        }"
+      >
+        Mensajes de error
+      </p>
+    </div>
+    <button type="submit" [disabled]="registerForm.invalid">Sign in</button>
+  </div>
+</form> -->
