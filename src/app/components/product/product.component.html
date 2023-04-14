@@ -7,5 +7,6 @@
   <img [src]="product.img" />
   <p>Price: {{ product.price }}$</p>
   <p>Name:{{ product.name }}</p>
+  <button (click)="addCard">Add car</button>
   <span *ngIf="!product.available">No disponible</span>
 </div>

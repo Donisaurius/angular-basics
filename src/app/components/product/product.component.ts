@@ -5,6 +5,8 @@ import {
   OnChanges,
   OnDestroy,
   AfterViewInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 
@@ -30,11 +32,18 @@ export class ProductComponent
     console.log('Constructor montado');
   }
 
+  @Output() addProduct = new EventEmitter<Product>();
+
+  addCard() {
+    console.log('ADD CART');
+    this.addProduct.emit(this.product);
+  }
+
   ngOnChanges() {
     // before render
     // Actualiza los cambios en los inputs
     // Se actualizará n veces para los @Inputs
-    console.log('ngOnChanges');
+    // console.log('ngOnChanges');
   }
 
   ngOnInit() {
@@ -47,10 +56,10 @@ export class ProductComponent
   ngAfterViewInit() {
     // After render
     // Aqui se manejan los hijos
-    console.log('Corre despues del render');
+    // console.log('Corre despues del render');
   }
 
   ngOnDestroy() {
-    console.log('Cuando se elimina el componente');
+    // console.log('Cuando se elimina el componente');
   }
 }
