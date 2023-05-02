@@ -4,6 +4,8 @@
   <p>Cantidad: {{ myShoppingCard.length }}</p>
   <p>Total: {{ total }}</p>
 </div>
+<p>Today: {{ today | date : "shortDate" }}</p>
+<p>Last: {{ date | timeAgo }}</p>
 <div class="products">
   <app-product
     *ngFor="let product of products"
