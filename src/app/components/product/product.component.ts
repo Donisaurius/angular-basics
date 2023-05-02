@@ -19,23 +19,25 @@ export class ProductComponent
   implements OnInit, OnChanges, OnDestroy, AfterViewInit
 {
   @Input() product: Product = {
-    name: '',
+    title: '',
     price: 0,
     available: true,
-    img: '',
+    image: '',
+    category: '',
+    description: '',
   };
 
   constructor() {
     // before render
     // Nada async
     // El constructor solo se monta una vez
-    console.log('Constructor montado');
+    // console.log('Constructor montado');
   }
 
   @Output() addProduct = new EventEmitter<Product>();
 
   addCard() {
-    console.log('ADD CART');
+    // console.log('ADD CART');
     this.addProduct.emit(this.product);
   }
 
@@ -50,7 +52,7 @@ export class ProductComponent
     // before render
     // Async
     // Corre una sola vez
-    console.log('ngOnInit');
+    // console.log('ngOnInit');
   }
 
   ngAfterViewInit() {

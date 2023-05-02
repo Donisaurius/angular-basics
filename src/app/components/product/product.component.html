@@ -1,12 +1,12 @@
 <div
   class="card"
   [ngClass]="{
-    animationAvailable: product.available
+    animationAvailable: product.price
   }"
 >
-  <img [src]="product.img" />
+  <img [src]="product.image" />
   <p>Price: {{ product.price }}$</p>
-  <p>Name:{{ product.name }}</p>
-  <button (click)="addCard">Add car</button>
-  <span *ngIf="!product.available">No disponible</span>
+  <p>Name:{{ product.title }}</p>
+  <button (click)="addCard()">Add car</button>
+  <span *ngIf="!product.price">No disponible</span>
 </div>
