@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -6,11 +8,17 @@ import { Product } from '../models/product.model';
 })
 export class StoreService {
   private products: Product[] = [];
+  // observable
+  private myCar = new BehaviorSubject<Product[]>([]);
+
+  // algoCon$ al final es un observable
+  myCar$ = this.myCar.asObservable();
 
   constructor() {}
 
   addProduct(product: Product) {
     this.products.push(product);
+    this.myCar.next(this.products);
   }
 
   getCard() {

@@ -89,3 +89,21 @@
     display: block;
   }
 }
+
+.cart {
+  display: flex;
+
+  .counter {
+    background-color: rgb(rgb(34, 170, 22), 1);
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 20px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    padding: 4px;
+    transform: translate(-10px, -10px);
+  }
+}
