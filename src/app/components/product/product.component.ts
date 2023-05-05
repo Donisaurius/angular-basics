@@ -19,11 +19,16 @@ export class ProductComponent
   implements OnInit, OnChanges, OnDestroy, AfterViewInit
 {
   @Input() product: Product = {
+    id: 0,
     title: '',
     price: 0,
     available: true,
-    image: '',
-    category: '',
+    images: [],
+    category: {
+      id: 0,
+      name: '',
+      typeImg: '',
+    },
     description: '',
   };
 
@@ -35,10 +40,15 @@ export class ProductComponent
   }
 
   @Output() addProduct = new EventEmitter<Product>();
+  @Output() showDetail = new EventEmitter();
 
   addCard() {
     // console.log('ADD CART');
     this.addProduct.emit(this.product);
+  }
+
+  onShowDetail() {
+    this.showDetail.emit(this.product.id);
   }
 
   ngOnChanges() {

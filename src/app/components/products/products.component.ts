@@ -13,6 +13,20 @@ export class ProductsComponent {
   products: Product[] = [];
   today = new Date();
   date = new Date(2023, 3, 2);
+  showProductDetail = false;
+  productChosen: Product = {
+    id: 0,
+    title: '',
+    price: 0,
+    available: true,
+    images: [],
+    category: {
+      id: 0,
+      name: '',
+      typeImg: '',
+    },
+    description: '',
+  };
 
   constructor(
     private storeService: StoreService,
@@ -30,5 +44,16 @@ export class ProductsComponent {
   onAddProduct(product: Product) {
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
+  }
+
+  toggleProductDetail() {
+    this.showProductDetail = !this.showProductDetail;
+  }
+
+  onShowDetail(id: number) {
+    this.productService.getProduct(id).subscribe((data) => {
+      this.toggleProductDetail();
+      this.productChosen = data;
+    });
   }
 }

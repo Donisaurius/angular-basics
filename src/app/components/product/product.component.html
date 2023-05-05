@@ -4,10 +4,11 @@
     animationAvailable: product.price
   }"
 >
-  <img [src]="product.image" />
+  <img *ngIf="product.images.length" [src]="product.images[0]" />
   <p>Price: {{ product.price | currency : "USD" }}</p>
   <p>Name:{{ product.title }}</p>
   <p appHighlight>Description: {{ product.description }}</p>
   <button (click)="addCard()">Add car</button>
+  <button (click)="onShowDetail()">Ver detalle</button>
   <span *ngIf="!product.price">No disponible</span>
 </div>
