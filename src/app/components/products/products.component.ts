@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/models/product.model';
+import {
+  CreateProductDTO,
+  Product,
+  UpdateProductDTO,
+} from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 @Component({
@@ -54,6 +58,34 @@ export class ProductsComponent {
     this.productService.getProduct(id).subscribe((data) => {
       this.toggleProductDetail();
       this.productChosen = data;
+    });
+  }
+
+  createNewProduct() {
+    const product: CreateProductDTO = {
+      title: 'Nuevo producto',
+      description: 'nuevo',
+      price: 200,
+      images: ['a'],
+      categoryId: 2,
+    };
+
+    this.productService.create(product).subscribe((data) => {
+      this.products.unshift(data);
+    });
+  }
+
+  updateProduct() {
+    const changes: UpdateProductDTO = {
+      title: 'New title',
+    };
+
+    const { id } = this.productChosen;
+
+    this.productService.update(id, changes).subscribe((data) => {
+      const productsToUpdate = this.products.filter((pr) => pr.id !== id);
+      productsToUpdate.unshift(data);
+      this.products = productsToUpdate;
     });
   }
 }

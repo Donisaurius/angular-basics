@@ -6,7 +6,7 @@
 </div>
 <p>Today: {{ today | date : "shortDate" }}</p>
 <p>Last: {{ date | timeAgo }}</p>
-<button (click)="toggleProductDetail()">Click</button>
+<button (click)="createNewProduct()">Create</button>
 <div class="products">
   <app-product
     *ngFor="let product of products"
@@ -25,5 +25,6 @@
       </ng-template>
     </swiper>
     <h1>{{ productChosen.description }}</h1>
+    <button (click)="updateProduct()">Editar</button>
   </div>
 </div>
