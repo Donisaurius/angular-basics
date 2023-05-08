@@ -11,6 +11,7 @@ export interface Product {
   available?: boolean;
   description: string;
   category: Category;
+  taxes?: number;
 }
 export interface CreateProductDTO extends Omit<Product, 'id' | 'category'> {
   categoryId: number;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { switchMap } from 'rxjs';
 import {
   CreateProductDTO,
   Product,
@@ -31,6 +32,9 @@ export class ProductsComponent {
     },
     description: '',
   };
+  limit = 10;
+  offset = 0;
+  statusDetail: 'loading' | 'success' | 'error' = 'success';
 
   constructor(
     private storeService: StoreService,
@@ -40,9 +44,7 @@ export class ProductsComponent {
   }
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((data) => {
-      this.products = data;
-    });
+    this.loadMore();
   }
 
   onAddProduct(product: Product) {
@@ -55,10 +57,40 @@ export class ProductsComponent {
   }
 
   onShowDetail(id: number) {
-    this.productService.getProduct(id).subscribe((data) => {
-      this.toggleProductDetail();
-      this.productChosen = data;
-    });
+    this.toggleProductDetail();
+    this.productService.getProduct(id).subscribe(
+      (data) => {
+        this.productChosen = data;
+        this.statusDetail = 'success';
+      },
+      (error) => {
+        alert(error);
+        this.statusDetail = 'error';
+      }
+    );
+  }
+
+  readAndUpdate(id: number) {
+    return (
+      this.productService
+        .getProduct(id)
+        // .pipe(
+        //   switchMap((product) =>
+        //     this.productService.update(product.id, { title: 'Callback hell' })
+        //   )
+        // switchMap((product) =>
+        //   this.productService.update(product.id, { title: 'Callback hell' })
+        // ),
+        // switchMap((product) =>
+        //   this.productService.update(product.id, { title: 'Callback hell' })
+        // ),//* Switch map para hacer el .then, o algo parecido
+        // * con el ZIP de rxjs podemos simular el Promise.all
+        // !NO COLOCAR ESTE TIPO DE LOGICA EN EL COMPONENTE. LLEVARLO AL SERVICE
+        // )
+        .subscribe((data) => {
+          console.log('data', data);
+        })
+    );
   }
 
   createNewProduct() {
@@ -87,5 +119,25 @@ export class ProductsComponent {
       productsToUpdate.unshift(data);
       this.products = productsToUpdate;
     });
+  }
+
+  deleteProduct() {
+    const { id } = this.productChosen;
+
+    this.productService.delete(id).subscribe(() => {
+      const productsToUpdate = this.products.filter((pr) => pr.id !== id);
+      this.products = productsToUpdate;
+    });
+
+    this.toggleProductDetail();
+  }
+
+  loadMore() {
+    this.productService
+      .getAllProducts(this.limit, this.offset)
+      .subscribe((data) => {
+        this.products = this.products.concat(data);
+        this.offset += this.limit;
+      });
   }
 }

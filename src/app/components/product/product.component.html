@@ -6,6 +6,7 @@
 >
   <img *ngIf="product.images.length" [src]="product.images[0]" />
   <p>Price: {{ product.price | currency : "USD" }}</p>
+  <p>IVA: {{ product.taxes | currency : "USD" }}</p>
   <p>Name:{{ product.title }}</p>
   <p appHighlight>Description: {{ product.description }}</p>
   <button (click)="addCard()">Add car</button>
