@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from './models/product.model';
+import { AuthService } from './services/auth.service';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +34,11 @@ export class AppComponent {
 
   inputParent: string = '';
   sonImage: string = '';
+
+  constructor(
+    private authService: AuthService,
+    private userService: UsersService
+  ) {}
 
   showName() {
     this.nameActive = !this.nameActive;
@@ -68,5 +75,25 @@ export class AppComponent {
 
   onLoaded(img: string) {
     this.sonImage = img;
+  }
+
+  createUser() {
+    this.userService
+      .create({
+        name: 'Daniel',
+        email: 'danielette@gmail.com',
+        password: '123456',
+      })
+      .subscribe((data) => {
+        console.log('data', data);
+      });
+  }
+
+  login() {
+    this.authService
+      .login('danielette@gmail.com', '123456')
+      .subscribe((data) => {
+        console.log('login', data);
+      });
   }
 }
